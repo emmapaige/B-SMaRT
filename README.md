@@ -13,32 +13,32 @@ install.packages(c("R.oo", "bmixture", "coda", "parallel", "stringr", "fields", 
 ### Installation
 
 Clone this repository: 
-git clone https://github.com/emmapaige/Dirichlet-Process-Mixture-Model.git
+git clone [https://github.com/emmapaige/B-SMaRT.git]
 
 ### The Workflow:
 
-1. **Setup (`EPMTest.R`)**:  
+1. **Setup (`TestRun.R`)**:  
    - Generates simulated genomic data.  
    - Sets up global parameters.
 
-2. **Main Script (`SHJ_algor.R`)**:  
+2. **Main Script (`Main.R`)**:  
    Performs the main analysis, which includes:
-   - **Preprocessing**: Combines homogenous sites and outputs joint data matrix with all time samples.  
+   - **Preprocessing**: Combines homogenous sites and outputs the joint data matrix with all time samples.  
    - **Processing**: Generates assignment labels using any of the three methods outlined in the manuscript.
-   - **Postprocessing**: Computes Hellinger distances between time samples given the assignment labels. Outputs substitution sites, noise sites, potential sites, and the computed threshold in the output file `FinalFixOne1.Rdata`.
+   - **Postprocessing**: Computes Hellinger distances given the assignment labels. Outputs substitution sites, noise sites, potential sites, and the computed threshold in the output file `FinalFixOne1.Rdata`.
 
 ### Supporting Scripts:
 
-1. `Tree.R`: The workflow for creating the hierarchical SCMH.
+1. `Tree.R`: The workflow for creating the 2cSCMH.
 2. `source.R`: Enables automatic hierarchical divisive tree.
-3. `AllfcnsFinal.R`: Provides all the necessary functions for the Main Script.
-4. `library_cmdline.R`: Provides all the source code needed for SLURM command line input.
-5. `GibbsMCEmma.R` : Workflow for obtaining the assignment labels using direct Gibbs sampler only.
+3. `ModifiedAllfcns.R`: Provides all the necessary functions for the Main Script.
+4. `LibraryCmdline.R`: Provides all the source code needed for SLURM command line input.
+5. `DirectGibbsMC.R` : Workflow for obtaining the assignment labels using direct Gibbs sampler only.
 6. `NonParamMC.R` : Workflow for obtaining the assignment labels using a Dirichlet Process.
-7. `FixGibbsMC.R` : Workflow for the third step of our algorithm, the single scan Gibbs sampler.
+7. `FixGibbsMC.R` : Workflow for the third step of our algorithm, the single Gibbs sampler scan.
 ---
 ## How to Run
-`SHJ_algor.R` is designed to be run on a SLURM cluster. To execute, submit something similar to the below SLURM script:
+`Main.R` is designed to be run on a SLURM cluster. To execute, submit something similar to the below SLURM script:
 
 ```bash
 #!/bin/bash
