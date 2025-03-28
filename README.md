@@ -40,16 +40,17 @@ git clone [https://github.com/emmapaige/B-SMaRT.git]
 ## How to Run
 `Main.R` is designed to be run on a SLURM cluster. To execute, submit something similar to the below SLURM script:
 
-```bash
-#!/bin/bash
+```#!/bin/bash
 
-#SBATCH --output=./slurmlogs/slurm-%j.out
+#SBATCH -t 1- 
+#SBATCH -N 1 
+#SBATCH -n 1
 
 mkdir -p ./Rlogs
 
 module add r/4.1.3
 
-R CMD BATCH --vanilla --args --shortname=Test --core=1 --copy=1 --GibbsMC=T --algorithm=ours --PostD=4 EPMTest.R ./Rlogs/EPMTest.out
+R CMD BATCH --vanilla --args --shortname=Test --core=1 --copy=1 --GibbsRun=T --algorithm=ours --PostD=4  --L=1 --folder=Tests --n=300 --user=<username> TestRun.R ./Rlogs/TestRun.out
 ```
 
 ### Inputs for Submission
@@ -58,10 +59,14 @@ The execution script above requires six input parameters, listed after --args. T
 - **`shortname`**: A short identifier for the current run (e.g., `"Test"`).
 - **`core`**: Number of cores needed.
 - **`copy`**: Copy number in case multiple runs are performed.
-- **`GibbsMC`**: Boolean indicating whether to use the third step of our algorithm, the single-scan direct Gibbs (T or F).
+- **`GibbsRun`**: Boolean indicating whether to use the third step of our algorithm, the single-scan direct Gibbs (T or F).
 - **`algorithm`**: The algorithm to use for generating the assignment labels:
   - `"ours"`: Single-coordinate MH, block MH, and one-scan Gibbs sampler.
   - `"direct"`: Direct Gibbs sampler.
   - `"DP"`: Dirichlet Process.
 - **`PostD`**: Number indicating which time sample is the treated one.
+- **`L`**: $\lambda$ prior parameter for poisson prior
+- **`folder`**: Name of the folder the results save to
+- **`n`**: Number of locations on the genome
+- **`user`**: username for job submissions
 
