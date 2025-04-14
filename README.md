@@ -59,9 +59,9 @@ The execution script above requires six input parameters, listed after --args. T
 - **`shortname`**: A short identifier for the current run (e.g., `"Test"`).
 - **`core`**: Number of cores needed.
 - **`copy`**: Copy number in case multiple runs are performed.
-- **`GibbsRun`**: Boolean indicating whether to use the third step of our algorithm, the single-scan direct Gibbs (T or F).
+- **`GibbsRun`**: Boolean indicating whether to use the third step of B-SMaRT, the single-scan direct Gibbs (T or F).
 - **`algorithm`**: The algorithm to use for generating the assignment labels:
-  - `"ours"`: Single-coordinate MH, block MH, and one-scan Gibbs sampler.
+  - `"ours"`: B-SMaRT (Single-coordinate MH, block MH, and one-scan Gibbs sampler).
   - `"direct"`: Direct Gibbs sampler.
   - `"DP"`: Dirichlet Process.
 - **`PostD`**: Number indicating which time sample is the treated one.
